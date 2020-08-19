@@ -1,0 +1,35 @@
+{% extends 'common.html' %}
+{% block content %}
+    {% include 'main_menu.html' %}
+    <h2 align="center" style="padding: 0px;color: green;font-family: 'Agency FB';font-size: 50px" onload="fun1()">Cart Items</h2>
+    <table border="2" align="center">
+    <tr><th class="th_title">No</th><th class="th_title">Name</th><th class="th_title">Remove From Cart</th></tr>
+    {% for x,y in data.items %}
+        {% if x != "csrftoken" and x != "sessionid" %}
+        <tr>
+            <th class="th_data">{{ x }}</th>
+            <th class="th_data">{{ y }}</th>
+            <th class="th_data"><a href="{% url 'del_cart' %}?key={{ x }}">Remove</a></th>
+{#            <th class="th_data"><a href="{% url 'productdetails' %}?idno={{ xno }}">Buy Now</a></th>#}
+
+        </tr>
+        {% endif %}
+    {% endfor %}
+
+    </table>
+
+
+        {% if length %}
+            <input type="hidden" value="{{ length }}" id="l1">
+        {% endif %}
+
+
+<script>
+        function fun1() {
+            x = document.getElementById("l1").value
+            document.getElementById("myid").innerHTML = x
+        }
+</script>
+
+
+{% endblock %}

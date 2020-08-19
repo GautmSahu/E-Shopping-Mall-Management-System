@@ -1,0 +1,40 @@
+{% extends 'common.html' %}
+{% block content %}
+
+    {% include 'main_menu.html' %}
+    <form action="{% url 'admin_verify' %}" method="post">
+    {% csrf_token %}
+    <table border="2" align="center">
+    <tr>
+        <th class="th_title">Admin Login</th>
+    </tr>
+    <tr><th class="th_data"><input type="text" placeholder="Username" required name="uname"></th></tr>
+    <tr><th class="th_data"><input type="password" placeholder="Password" required name="upass"></th></tr>
+    <tr><th class="th_data" style="text-align: center"><button class="th_data_button" type="submit">Login</button> </th></tr>
+
+        {% if messages %}
+            {% for x in messages %}
+                <tr>
+                    <th>
+                       <h2 style="color: red;font-family: 'Agency FB'"> {{ x }}</h2>
+                    </th>
+                </tr>
+            {% endfor %}
+        {% endif %}
+
+    </table>
+    </form>
+
+    {% if length %}
+        <input type="hidden" value="{{ length }}" id="l">
+    {% endif %}
+
+
+<script>
+        function fun1() {
+            x = document.getElementById("l").value
+            document.getElementById("myid").innerHTML = x
+        }
+</script>
+
+{% endblock %}

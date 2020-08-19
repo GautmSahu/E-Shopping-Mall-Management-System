@@ -1,0 +1,45 @@
+{% extends 'common.html' %}
+{% block content %}
+    {% include 'main_menu.html' %}
+
+    <form action="{% url 'validate_user' %}" method="post">
+    {% csrf_token %}
+
+    <table border="2" align="center" onload="fun1()">
+
+        {% if data1 %}
+            <tr><th class="th_data" colspan="2">{{ data1 }}</th></tr>
+
+        {% endif %}
+         {% if data %}
+            <tr><th class="th_data" colspan="2">{{ data }}</th></tr>
+
+        {% endif %}
+    <tr><th colspan="2" class="th_title">User Login</th></tr>
+    <tr><th class="th_data">Username:</th><th class="th_data"><input type="text" name="uname" required placeholder="Username"></th></tr>
+    <tr><th class="th_data">Password:</th><th class="th_data"><input type="password" name="upass" required placeholder="Password"></th></tr>
+    <tr><th colspan="2" class="th_data" style="text-align: center"><button class="th_data_button" type="submit">Login</button></th></tr>
+    <tr><th class="th_data" colspan="2" style="text-align: center"><a href="{% url 'user_forget_password' %}">Forget Password?</a> </th></tr>
+    <tr><th class="th_data" colspan="2" style="text-align: center"><a href="{% url 'register' %}">Not Registered?</a> </th></tr>
+
+
+    </table>
+    </form>
+
+
+        {% if length %}
+            <input type="hidden" value="{{ length }}" id="l1">
+        {% endif %}
+
+
+<script>
+        function fun1() {
+            x = document.getElementById("l1").value
+            document.getElementById("myid").innerHTML = x
+        }
+</script>
+
+
+
+
+{% endblock %}

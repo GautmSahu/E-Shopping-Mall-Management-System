@@ -1,0 +1,27 @@
+{% extends 'common.html' %}
+{% block content %}
+    {% include 'user_menu.html' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <table align="center" border="3">
+    <tr><th colspan="4" class="th_title" style="text-align: center">Your Past Orders</th></tr>
+        <tr>
+            <th class="th_title">Product Name</th>
+            <th class="th_title">Qty</th>
+            <th class="th_title">Total Bill</th>
+            <th class="th_title">Date Of Purchase</th>
+        </tr>
+    {% for data in orders %}
+        <tr>
+            <th class="th_data">
+                {% for name in data.product_id.values %}
+                    {{ name.name }}
+                {% endfor %}
+            </th>
+            <th class="th_data">{{ data.qty }}</th>
+            <th class="th_data">{{ data.total_bill }}</th>
+            <th class="th_data">{{ data.purchase_date }}</th>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

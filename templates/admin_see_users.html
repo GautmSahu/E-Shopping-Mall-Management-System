@@ -1,0 +1,105 @@
+{% extends 'common.html' %}
+{% block content %}
+
+    {% include 'admin_menu.html' %}
+
+
+            <table border="2" align="center">
+            <tr><th class="th_title" colspan="10">Pending Users</th></tr>
+                <tr>
+                <th class="th_data">Id</th>
+                <th class="th_data">Name</th>
+                <th class="th_data">Email</th>
+                <th class="th_data">Contact No</th>
+                <th class="th_data">Gender</th>
+                <th class="th_data">Username</th>
+                <th class="th_data">Password</th>
+                <th class="th_data">Status</th>
+                    <th class="th_data">Approve/Decline</th>
+            </tr>
+            <br><br>
+            {% for x in data1 %}
+                <tr class="th_data">
+                    <th class="th_data">{{ x.id }}</th>
+                    <th class="th_data">{{ x.name }}</th>
+                    <th class="th_data">{{ x.email }}</th>
+                    <th class="th_data">{{ x.contactno }}</th>
+                    <th class="th_data">{{ x.gender }}</th>
+                    <th class="th_data">{{ x.username }}</th>
+                <th class="th_data">{{ x.password }}</th>
+                <th class="th_data">{{ x.status }}</th>
+                    <th class="th_data">
+                <form action="{% url 'approve_user' %}" method="post">
+                    {% csrf_token %}
+                    <button class="th_data_button" type="submit" value="{{ x.id }}" name="approve">Approve</button>
+                </form>
+                <form action="{% url 'decline_user' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="th_data_button" value="{{ x.id }}" name="decline">Decline</button>
+                </form>
+                </th>
+                </tr>
+            {% endfor %}
+            </table>
+
+
+
+    <table border="2" align="center">
+            <tr><th class="th_title" colspan="10">Approved Users</th></tr>
+                <tr>
+                <th class="th_data">Id</th>
+                <th class="th_data">Name</th>
+                <th class="th_data">Email</th>
+                <th class="th_data">Contact No</th>
+                <th class="th_data">Gender</th>
+                <th class="th_data">Username</th>
+                <th class="th_data">Password</th>
+                <th class="th_data">Status</th>
+            </tr>
+            <br><br>
+            {% for y in data2 %}
+                <tr>
+                    <th class="th_data">{{ y.id }}</th>
+                    <th class="th_data">{{ y.name }}</th>
+                    <th class="th_data">{{ y.email }}</th>
+                    <th class="th_data">{{ y.contactno }}</th>
+                    <th class="th_data">{{ y.gender }}</th>
+                    <th class="th_data">{{ y.username }}</th>
+                <th class="th_data">{{ y.password }}</th>
+                <th class="th_data">{{ y.status }}</th>
+                </tr>
+            {% endfor %}
+            </table>
+
+
+
+    <table border="2" align="center">
+            <tr><th class="th_title" colspan="10">Declined Users</th></tr>
+                <tr>
+                <th class="th_data">Id</th>
+                <th class="th_data">Name</th>
+                <th class="th_data">Email</th>
+                <th class="th_data">Contact No</th>
+                <th class="th_data">Gender</th>
+                <th class="th_data">Username</th>
+                <th class="th_data">Password</th>
+                <th class="th_data">Status</th>
+            </tr>
+            <br><br>
+            {% for z in data3 %}
+                <tr>
+                    <th class="th_data">{{ z.id }}</th>
+                    <th class="th_data">{{ z.name }}</th>
+                    <th class="th_data">{{ z.email }}</th>
+                    <th class="th_data">{{ z.contactno }}</th>
+                    <th class="th_data">{{ z.gender }}</th>
+                    <th class="th_data">{{ z.username }}</th>
+                <th class="th_data">{{ z.password }}</th>
+                <th class="th_data">{{ z.status }}</th>
+                </tr>
+            {% endfor %}
+            </table>
+<br><br>
+
+
+{% endblock %}

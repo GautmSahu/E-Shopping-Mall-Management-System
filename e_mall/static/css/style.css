@@ -1,0 +1,92 @@
+#copyright{
+    background-color: greenyellow;
+    color: coral;
+    font-family: Chiller;
+    font-size: 30px;
+}
+#title
+{
+    color: darkorange;
+    font-family:"Agency FB";
+    font-size: 50px;
+    background-color: peachpuff;
+}
+.menu{
+    width: 145px;
+    background-color: aqua;
+    color: darkorange;
+    font-size: 30px;
+    font-family: "Agency FB";
+}
+a{
+    text-decoration: none;
+}
+.menu{
+    border-radius: 15px 0px 15px 0px;
+}
+.menu:hover{
+    color: red;
+    background-color: darkorchid;
+}
+.menu:visited{
+    background-color: aqua;
+}
+#index_product_image{
+    border-radius: 10px 10px 10px 10px;
+
+}
+.index_product_header{
+    font-family: "Agency FB";
+    font-size: 20px;
+    background-color: coral;
+    color:purple;
+    width: 100px;
+}
+.index_product_title{
+    font-size: 30px;
+    font-family: "Agency FB";
+    color: purple;
+    background-color: aqua;
+    padding: 10px;
+}
+.th_title{
+    background-color: coral;
+    font-family: "Agency FB";
+    font-size: 30px;
+    padding: 10px;
+}
+.th_data{
+    background-color: burlywood;
+    font-family: "Agency FB";
+    font-size: 20px;
+    padding: 5px;
+}
+.th_data_button
+{
+     background-color:burlywood;
+    font-family: "Agency FB";
+    font-size: 25px;
+    padding: 5px;
+    border-radius: 10px 0px 10px 0px;
+}
+.page_button{
+    background-color:burlywood;
+    font-family: "Agency FB";
+    font-size: 25px;
+    padding: 5px;
+    border-radius: 10px 10px 10px 10px;
+}
+.cart_button
+{
+    background-color:burlywood;
+    font-family: "Agency FB";
+    font-size: 25px;
+    padding: 5px;
+    border-radius: 10px 0px 10px 0px;
+}
+
+
+
+
+
+

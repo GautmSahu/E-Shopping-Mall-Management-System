@@ -1,0 +1,36 @@
+{% extends 'common.html' %}
+{% block content %}
+    {% include 'user_menu.html' %}
+    {% load  static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <form action="{% url 'place_order' %}" method="post">
+    {% csrf_token %}
+    <table align="center" border="4">
+    <tr><th colspan="4" class="th_title" style="text-align: center">Buy Products</th></tr>
+        <tr>
+            <th class="th_title">Product Name</th>
+            <th class="th_title">Quantity</th>
+            <th class="th_title">Price</th>
+            <th class="th_title">Total Bill</th>
+        </tr>
+        {% for res in data %}
+            <tr>
+                <input type="hidden" name="idno" value="{{ res.no }}">
+                <th class="th_data">{{ res.name }}</th>
+                <th class="th_data"><input type="number" name="qty" id="qty" value="1" min="1" onchange="calculateBill()"></th>
+                <th class="th_data"><input type="number" id="mrp" readonly value="{{ res.price }}" name="price"></th>
+                <th class="th_data"><input type="number" id="t_bill" name="t_bill" value="{{ res.price }}"></th>
+            </tr>
+        {% endfor %}
+        <tr><th colspan="4" style="text-align: center"><button type="submit"  class="th_data_button">Pay and Finish</button></th></tr>
+    </table>
+    </form>
+    <script>
+        function calculateBill() {
+            var qty=document.getElementById('qty').value
+            var price =document.getElementById('mrp').value
+            var bill=qty*price
+            document.getElementById('t_bill').value=bill
+        }
+    </script>
+{% endblock %}

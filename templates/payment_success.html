@@ -1,0 +1,7 @@
+{% extends 'common.html' %}
+{% block content %}
+    {% include 'user_menu.html' %}
+    {% if success %}
+        <h3 align="center" style="color: green">{{ success }}</h3>
+    {% endif %}
+{% endblock %}

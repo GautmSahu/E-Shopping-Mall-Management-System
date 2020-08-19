@@ -1,0 +1,53 @@
+{% extends 'common.html' %}
+{% block content %}
+    {% include 'user_menu.html' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <div>
+    {% if data1 %}
+        {{ data1 }}
+    {% endif %}
+    </div>
+    <div>
+    <table border="2" align="center">
+    <tr><th colspan="3" class="index_product_title">All Products</th></tr><br>
+        {% if data2 %}
+            {% for x in data2 %}
+            <tr><th rowspan="4"><a href="{% url 'productdetails' %}?idno={{ x.no }}"> <img id="index_product_image" src="{{ x.photo.url }}" height="200" width="200"></a></th></tr>
+                <tr><th class="index_product_header">Name :</th><th class="index_product_header"><a href="{% url 'productdetails' %}?idno={{ x.no }}">{{ x.name }}</a></th></tr>
+            <tr><th class="index_product_header">Price :</th><th class="index_product_header">{{ x.price }}</th></tr>
+            <tr><th class="index_product_header">Status:</th><th class="index_product_header">{{ x.status }}</th></tr>
+        {% endfor %}
+        {% endif %}
+
+
+        {% for x in data %}
+            <tr><th rowspan="4"><img id="index_product_image" src="{{ x.photo.url }}" height="200" width="200"></th></tr>
+            <tr><th class="index_product_header">Name :</th><th class="index_product_header">{{ x.name }}</th></tr>
+            <tr><th class="index_product_header">Price :</th><th class="index_product_header">{{ x.price }}</th></tr>
+            <tr><th class="index_product_header">Status:</th><th class="index_product_header">{{ x.status }}</th></tr>
+        {% endfor %}
+
+
+
+    <tr>
+        <th colspan="3">
+            {% if data.has_next %}
+                <a href="{% url 'user_main' %}?page_number={{ data.next_page_number }}"> <button class="page_button"> Next</button></a>
+            {% endif %}
+
+            {% for x in data.paginator.page_range %}
+              <a href="{% url 'user_main' %}?page_number={{ x }}"> <span style="padding-left: 10px"> {{ x }}</span></a>
+             {% endfor %}
+
+
+            {% if data.has_previous %}
+               <a href="{% url 'user_main' %}?page_number={{ data.previous_page_number }}"> <button class="page_button"> Previous</button></a>
+            {% endif %}
+
+        </th>
+    </tr>
+        </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'common.html' %}
+{% block content %}
+    {% include 'admin_menu.html' %}
+    {% load static %}
+
+        <form method="post" action="{%  url 'admin_save_product' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+        <table border="2" align="center">
+            {% for x in data %}
+                {% if messages %}
+                    {% for x in messages %}
+                         <tr><th class="th_data" colspan="2">
+                             <h2 style="color: green;font-family: 'Agency FB'">{{ x }}</h2>
+                         </th></tr>
+                    {% endfor %}
+                {% endif %}
+        <br>
+                {% if mess %}
+                    <tr><th class="th_data">{{ mess }}</th></tr>
+                {% endif %}
+            <tr><th class="th_title" colspan="2">Update Product</th></tr>
+            <tr><th class="th_data">Id :</th><th class="th_data"><input type="name" readonly required value="{{ x.no }}" placeholder="Product Id"></th></tr>
+            <tr><th class="th_data">Name :</th><th class="th_data"><input type="name" name="pname" required value="{{ x.name }}" placeholder="Product Name"></th></tr>
+            <tr><th class="th_data">Price :</th><th class="th_data"><input type="number" required name="pprice" value="{{ x.price }}" placeholder="Product Price" min="1"></th></tr>
+            <tr><th class="th_data">Quantity :</th><th class="th_data"><input type="number" required name="pqty" value="{{ x.quantity }}" placeholder="Product Quantity"></th></tr>
+
+                <tr><th class="th_data">Image</th><th class="th_data"><input type="file" name="pimg" src="{{ x.photo.url }}"></th></tr>
+                <tr><th class="th_data">Description</th><th class="th_data"><textarea rows="7" cols="40" name="desc">{{ x.description }}</textarea></th></tr>
+
+            <tr><th class="th_data" colspan="2" style="text-align: center"><button class="th_data_button" type="submit" value="{{ x.no }}" name="no">Update</button></th></tr>
+
+
+        {% endfor %}
+        </table>
+        </form>
+
+ {% endblock %}

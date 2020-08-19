@@ -1,0 +1,16 @@
+{% extends 'common.html' %}
+{% block content %}
+
+    {% include 'admin_menu.html' %}
+    <form action="{% url 'admin_see_users' %}" method="post">
+    {% csrf_token %}
+    <div>
+        <table border="1" align="center" width="200"><tr><th class="th_title">Users</th></tr>
+        <tr><th class="th_data"><input type="checkbox" name="c1" value="Pending" checked>Pending</th></tr>
+        <tr><th class="th_data"><input type="checkbox" name="c2" value="Approved">Approved</th></tr>
+        <tr><th class="th_data"><input type="checkbox" name="c3" value="Declined">Declined</th></tr>
+    <tr><th class="th_data" style="text-align: center"><button class="th_data_button" type="submit">Ok</button></th></tr>
+    </table>
+    </div>
+    </form>
+{% endblock %}

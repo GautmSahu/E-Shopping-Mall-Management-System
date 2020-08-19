@@ -1,0 +1,58 @@
+{% extends 'common.html' %}
+{% block content %}
+    {% include 'main_menu.html' %}
+    {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <div>
+    <table border="2" align="center">
+    <tr><th colspan="3" class="index_product_title" style="text-align: center">All Products</th></tr><br>
+
+         {% for x in page %}
+             <tr><th rowspan="4"><a href="{% url 'productdetails' %}?idno={{ x.no }}"><img id="index_product_image" src="{{ x.photo.url }}" height="200" width="200"></a></th></tr>
+             <tr><th class="index_product_header">Name :</th><th class="index_product_header"><a href="{% url 'productdetails' %}?idno={{ x.no }}">{{ x.name }}</a></th></tr>
+            <tr><th class="index_product_header">Price :</th><th class="index_product_header">{{ x.price }}</th></tr>
+            <tr><th class="index_product_header">Status:</th><th class="index_product_header">{{ x.status }}</th></tr>
+             <tr><th class="index_product_header" colspan="3" style="text-align: center">
+                 <form action="{% url 'save_cart_items' %}">
+                     <input type="hidden" name="no" required value="{{ x.no }}">
+                     <input type="hidden" name="name" required value="{{ x.name }}">
+                     <button class="cart_button" onclick="fun1">
+                        Add To Cart
+                     </button>
+
+                 </form>
+             </th></tr>
+        {% endfor %}
+
+      <tr>
+      <th colspan="3">
+    {% if page.has_next %}
+     <a href="{% url 'main' %}?page_number={{ page.next_page_number }}"><button class="page_button">Next</button></a>
+    {% endif %}
+
+      {% for x in page.paginator.page_range %}
+         <span style="padding-left: 10px"><a href="{% url 'main' %}?page_number={{ x }}">{{ x }}</a></span>
+      {% endfor %}
+
+    {% if page.has_previous %}
+        <a href="{% url 'main' %}?page_number={{ page.previous_page_number }}"><button class="page_button"> Previous</button> </a>
+    {% endif %}
+    </th>
+      </tr>
+
+        </table>
+    {% if length %}
+        <input type="hidden" value="{{ length }}" name="l">
+    {% endif %}
+
+    </div>
+
+
+<script>
+    function fun1() {
+        x=document.getElementById("myid").value
+        x+=1
+        document.getElementById("myid").innerHTML=x
+    }
+</script>
+{% endblock %}

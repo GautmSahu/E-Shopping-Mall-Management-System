@@ -1,0 +1,92 @@
+{% extends 'common.html' %}
+{% block content %}
+    {% include 'admin_menu.html' %}
+    {% load static %}
+    <form action="{% url 'save_product' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <table border="2" align="center">
+            <tr><th class="th_title" colspan="2">Add Products</th></tr>
+            {% if messages %}
+                    {% for x in messages %}
+                         <tr><th colspan="2">
+                             <h2 style="color: green;font-family: 'Agency FB'">{{ x }}</h2>
+                         </th></tr>
+                    {% endfor %}
+            {% endif %}
+            <tr><th class="th_data">Name :</th><th class="th_data"><input type="name" required name="pname" placeholder="Product Name"></th></tr>
+            <tr><th class="th_data">Price :</th><th class="th_data"><input type="number" required name="pprice" placeholder="Product Price" min="1"></th></tr>
+            <tr><th class="th_data">Quantity :</th><th class="th_data"><input type="number" required min="1" name="pqty" placeholder="Product Quantity"></th></tr>
+            <tr><th class="th_data">Image</th><th class="th_data"><input type="file" name="pimg" ></th></tr>
+            <tr><th class="th_data">Description</th><th class="th_data"><textarea name="desc" rows="7" cols="40"></textarea></th></tr>
+            <tr><th class="th_data_button" colspan="2" style="text-align: center"><button class="th_data_button" type="submit">Add</button></th></tr>
+        <br>
+        </table>
+    </form>
+            <table border="2" align="center">
+                <tr><th class="th_title" colspan="10">All Products</th></tr>
+                <tr>
+                <th class="th_data">No</th>
+                <th class="th_data">Name</th>
+                <th class="th_data">Price</th>
+                <th class="th_data">Quantity</th>
+                <th class="th_data">Image</th>
+                <th class="th_data">Description</th>
+                <th class="th_data">Date</th>
+                <th class="th_data">Status</th>
+                <th class="th_data_button">Update</th>
+                <th class="th_data_button">De-Active</th>
+            </tr>
+            <br><br>
+            {% for x in data %}
+                <tr>
+                    <th class="th_data">{{ x.no }}</th>
+                    <th class="th_data">{{ x.name }}</th>
+                    <th class="th_data">{{ x.price }}</th>
+                    <th class="th_data">{{ x.quantity }}</th>
+                    <th class="th_data"><img src="{{  x.photo.url }}" height="110" width="100"></th>
+                    <th class="th_data"><textarea readonly rows="7" cols="40">{{ x.description }}</textarea></th>
+                    <th class="th_data">{{ x.pdate }}</th>
+                    <th class="th_data">{{ x.status }}</th>
+                    <th class="th_data">
+                        <form action="{% url 'admin_update_product' %}" method="post">
+                            {% csrf_token %}
+                            <button class="th_data_button" type="submit" name="update" value="{{ x.no }}">Update</button>
+                        </form>
+                    </th>
+                    <th class="th_data">
+                        <form action="{% url 'admin_deactive_product' %}" method="post">
+                            {% csrf_token %}
+                        {% if x.status == "active" %}
+                            <button class="th_data_button" type="submit" name="deactive" value="{{ x.no }}">De-Active</button>
+                            {% else %}
+                            <button class="th_data_button" type="submit" name="deactive" value="{{ x.no }}">Active</button>
+                        {% endif %}
+                        </form>
+                    </th>
+                </tr>
+            {% endfor %}
+
+            <tr>
+                <th colspan="9">
+                    {% if data.has_previous %}
+                    <a href="{% url 'admin_products' %}?page_no={{ data.previous_page_number }}"><button class="page_button" type="submit"> Previous </button></a>
+                    {% endif %}
+
+
+                {% for x in data.paginator.page_range %}
+                   <a href="{% url 'admin_products' %}?page_no={{ x }}"><span style="padding-left: 10px"> {{ x }}</span></a>
+                {% endfor %}
+
+
+                    {% if data.has_next %}
+                        <a href="{% url 'admin_products' %}?page_no={{ data.next_page_number }}"><button class="page_button" type="submit"> Next </button></a>
+                    {% endif %}
+                </th>
+            </tr>
+
+
+            </table>
+
+
+{% endblock %}

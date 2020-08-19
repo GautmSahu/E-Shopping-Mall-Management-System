@@ -1,0 +1,24 @@
+{% extends 'common.html' %}
+{% block content %}
+    {% include 'main_menu.html' %}
+        <table align="center" border="2">
+            <tr><th colspan="2" class="th_title">Product Details</th></tr>
+            {% for data in details %}
+            <tr>
+                <th class="th_title">Name : </th><th class="th_data">{{ data.name }}</th>
+            </tr>
+                <tr>
+                <th class="th_title">Price : </th><th class="th_data">{{ data.price }}</th>
+            </tr>
+                <tr>
+                <th class="th_title">Description : </th><th class="th_data"><textarea rows="7" cols="40" readonly>{{ data.description }}</textarea></th>
+            </tr>
+                <tr>
+                <th class="th_title">Status : </th><th class="th_data">{{ data.status }}</th>
+            </tr>
+                <tr><th colspan="2" style="text-align: center">
+                    <a href="{% url 'buyproduct' %}?idno={{ data.no }}"><button class="cart_button">Buy Now</button></a>
+                </th></tr>
+        {% endfor %}
+        </table>
+{% endblock %}

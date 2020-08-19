@@ -1,0 +1,52 @@
+{% extends 'common.html' %}
+
+{%  block content %}
+    {% include 'main_menu.html' %}
+    <form action="{%  url 'register_user' %}" method="post">
+    {% csrf_token %}
+    <h1  onload="fun1()"></h1>
+    <table border="2" align="center">
+        {% if mess %}
+            <tr>
+            <th class="th_data">
+                {{ mess }}
+            </th>
+            </tr>
+        {% endif %}
+        {% if mess1 %}
+            <tr>
+            <th class="th_data">
+                {{ mess1 }}
+            </th>
+            </tr>
+        {% endif %}
+        <tr>
+            <th class="th_title">User Registration</th>
+        </tr>
+    <tr><th class="th_data"><input type="text" name="name" placeholder="Name" required></th></tr>
+    <tr><th class="th_data"><input type="email" required placeholder="Email" name="email"></th></tr>
+    <tr><th class="th_data"> <input type="number" placeholder="Contact No" required name="contactno"></th></tr>
+    <tr><th class="th_data">Gender:<input type="radio" name="r1" value="Male" checked>Male
+            <input type="radio" name="r1" value="Female">Female
+            <input type="radio" name="r1" value="Others">Others</th></tr>
+    <tr><th class="th_data"><input type="text" name="username" required placeholder="Username"></th></tr>
+    <tr><th class="th_data"><input type="password" required placeholder="Password" name="password"></th></tr>
+    <tr><th class="th_data" style="text-align: center"><button class="th_data_button" type="submit">Register</button></th></tr>
+    <tr><th class="th_data" style="text-align: center"><a href="{% url 'user_login' %}">Login</a> </th></tr>
+    </table>
+    </form>
+
+        {% if length %}
+            <input type="hidden" value="{{ length }}" id="l1">
+        {% endif %}
+
+
+<script>
+        function fun1() {
+            x = document.getElementById("l1").value
+            document.getElementById("myid").innerHTML = x
+        }
+</script>
+
+
+{% endblock %}
